@@ -1,6 +1,14 @@
 import React from "react";
 import Control from "./Control";
 
+String.prototype.replaceAt = function (index, replacement) {
+  return (
+    this.substring(0, index) +
+    replacement +
+    this.substring(index + replacement.length)
+  );
+};
+
 class App extends React.Component {
   constructor(props: any) {
     super(props);
@@ -10,9 +18,19 @@ class App extends React.Component {
 
     this.style = document.createElement("style");
     this.style.innerHTML = `
-    body {
-      color: red;
+
+    .blur25{
+      filter:blur(1px);
     }
+
+    .blur30{
+      filter:blur(3px);
+    }
+
+    .blur40{
+      filter:blur(6px);
+    }
+
     .greyscale {
       filter: grayscale(1);
     }
@@ -76,11 +94,14 @@ class App extends React.Component {
 
     this.state = {
       greyscale: false,
-      controlsOpen: true,
+      controlsOpen: false,
       fontScale: 100,
       baseFontSize,
       elementType: false,
       disableStyles: false,
+      blur: "",
+      dysletic: true,
+      dysleticInitiated: false,
     };
   }
 
@@ -88,6 +109,10 @@ class App extends React.Component {
     document.addEventListener("wheel", this.handleKeyDown);
     document.addEventListener("keyup", this.handleKeyUp);
     document.head.appendChild(this.style);
+
+    // this.simulateDyslexia();
+
+    console.log("mount");
   }
 
   // TODO - show feedback in main window
@@ -121,6 +146,62 @@ class App extends React.Component {
     // }, 1000);
   };
 
+  initiateSimulateDyslexia = () => {
+    const texts = document.querySelectorAll(
+      "a, h1, h2, h3, h4, h5, h6, p, button, label, li"
+    );
+    this.setState({ ...this.state, dysleticInitiated: true });
+
+    console.log("init");
+    texts.forEach((n) => {
+      n.setAttribute("data-text", n.innerText);
+    });
+  };
+
+  resetSimulateDyslexia = () => {
+    const texts = document.querySelectorAll(
+      "a, h1, h2, h3, h4, h5, h6, p, button, label, li"
+    );
+    texts.forEach((n) => {
+      n.innerText = n.getAttribute("data-text");
+    });
+  };
+
+  simulateDyslexia = () => {
+    if (!this.state.dysleticInitiated) {
+      this.initiateSimulateDyslexia();
+      setTimeout(this.simulateDyslexia, 2000);
+      return;
+    }
+    const texts = document.querySelectorAll(
+      "a, h1, h2, h3, h4, h5, h6, p, button, label, li"
+    );
+
+    texts.forEach((n) => {
+      let text = n.getAttribute("data-text");
+
+      if (text?.trim()) {
+        let letter1pos, letter2pos, letter1, letter2;
+        do {
+          letter1pos = Math.floor(text.length * Math.random());
+          letter2pos = Math.floor(text.length * Math.random());
+          letter1 = text.charAt(letter1pos);
+          letter2 = text.charAt(letter2pos);
+          console.log(letter1, letter2);
+        } while (letter1 === " " || letter2 === " ");
+        text = text.replaceAt(letter1pos, letter2);
+        text = text.replaceAt(letter2pos, letter1);
+      }
+      n.innerText = text;
+    });
+
+    if (this.state.dysletic) {
+      setTimeout(this.simulateDyslexia, 400);
+    } else {
+      resetSimulateDyslexia();
+    }
+  };
+
   toggleDisableStyles = () => {
     if (this.state.disableStyles) {
       document
@@ -135,6 +216,29 @@ class App extends React.Component {
       ...this.state,
       disableStyles: !this.state.disableStyles,
     });
+  };
+
+  toggleBlur = () => {
+    if (this.state.blur) {
+      document.body.classList.remove(this.state.blur);
+    }
+    switch (this.state.blur) {
+      case "":
+        this.setState({ ...this.state, blur: "blur25" });
+        document.body.classList.add("blur25");
+        break;
+      case "blur25":
+        this.setState({ ...this.state, blur: "blur30" });
+        document.body.classList.add("blur30");
+        break;
+      case "blur30":
+        this.setState({ ...this.state, blur: "blur40" });
+        document.body.classList.add("blur40");
+        break;
+      case "blur40":
+        this.setState({ ...this.state, blur: "" });
+        break;
+    }
   };
 
   toggleGreyScale = () => {
@@ -173,6 +277,7 @@ class App extends React.Component {
             toggleGreyScale={this.toggleGreyScale}
             toggleElementType={this.toggleElementType}
             toggleDisableStyles={this.toggleDisableStyles}
+            toggleBlur={this.toggleBlur}
           />
         )}
       </div>

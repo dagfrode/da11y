@@ -26,6 +26,7 @@ class Control extends React.Component {
         <button onClick={this.props.toggleGreyScale}>greyscale</button>
         <button onClick={this.props.toggleElementType}>elementType</button>
         <button onClick={this.props.toggleDisableStyles}>disableStyles</button>
+        <button onClick={this.props.toggleBlur}>blur</button>
       </>,
       this.containerEl
     );
