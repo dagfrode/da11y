@@ -1,6 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { CheckList } from "./CheckList";
+import { TestOverview } from "./Test";
 
 class Control extends React.Component {
   constructor(props: any) {
@@ -22,7 +22,8 @@ class Control extends React.Component {
   render() {
     return createPortal(
       <>
-        <CheckList />
+        <TestOverview />
+        {/* <CheckList /> */}
         <button onClick={this.props.toggleGreyScale}>greyscale</button>
         <button onClick={this.props.toggleElementType}>elementType</button>
         <button onClick={this.props.toggleDisableStyles}>disableStyles</button>

@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <style>
+      fieldset label {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      input + span {
+        display: inline-block;
+      }
+
+      input:checked + span {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>A11y testing guide</h1>
+    <h2>Testing in CI/CD</h2>
+    <button id="toggleGreyScale">greyscale</button>
+    <p>
+      We reccomend that you set up linting and playwright tests as part of your
+      developer enviroment and pipelines.
+    </p>
+
+    <h2>Automated test</h2>
+    <p>
+      Before continuing testing. We reccomend you run a tool like Wave or
+      SiteImprove. They are both good free extensions that help you catch quite
+      a few code detectable problems.
+    </p>
+
+    <h2>Manual tests</h2>
+
+    <p>
+      You have now tested what can be automated. It is now time to roll up your
+      sleves and get started. We will guide you trough a few subject trying to
+      cover what has to be tested manually as well as possible.
+    </p>
+
+    <p>
+      If you answer now to any of these questions, you are probably breaking one
+      or more success criterion
+    </p>
+
+    <h3>Keyboard</h3>
+    <fieldset>
+      <legend>Keyboard</legend>
+      <label>
+        <input type="checkbox" />
+        <span>
+          Can you use the keyboard to access all functions of the page? No need
+          for the mouse at all? No getting stuck in some input elment or modal?
+        </span>
+      </label>
+      <label>
+        <input type="checkbox" />
+        Does the order the focus is moved make sense?
+      </label>
+      <label>
+        <input type="checkbox" />
+        Can you see where the focus is at all times? Even after filling in
+        information?
+      </label>
+      <label>
+        <input type="checkbox" />Does the webpage stay the same when moving the
+        focus / entering information?
+      </label>
+    </fieldset>
+
+    <details>
+      <summary>WCAG Success Criterion related to keyboard</summary>
+      - Success Criterion 2.1.1 Keyboard (A) - all functionality is operable
+      trough a keyboard - Success Criterion 2.1.2 No Keyboard Trap (A) - Success
+      Criterion 2.1.4 Character Key Shortcuts (A) - no one letter shortcut -
+      Success Criterion 2.4.3 Focus Order (A) - the focus order should make
+      sense by precerving meaning and operability - Success Criterion 2.4.7
+      Focus Visible (AA) - you should see where the focus is - Success Criterion
+      2.4.11 Focus Not Obscured (Minimum) - When a user interface component
+      receives keyboard focus, the component is not entirely hidden due to
+      author-created content. - Success Criterion 3.2.1 On Focus (A) - change of
+      focus should not change context - the page should be unchanged when moving
+      the focus around as it should never be interpreded as an input action -
+      Success Criterion 3.2.2 On Input (A) - changing a setting should not
+      change the context - make it clear to the user if changs of a setting will
+      do major changes to the page they might not observe if they do not see the
+      whole page at once
+    </details>
+
+    <script src="main.js"></script>
+  </body>
+</html>

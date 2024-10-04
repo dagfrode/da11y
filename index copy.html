@@ -1,0 +1,1959 @@
+<!doctype html>
+
+
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    
+        <script>
+            try{!function(){var e="Expected a function",t=NaN,n="[object Symbol]",r=/^\s+|\s+$/g,i=/^[-+]0x[0-9a-f]+$/i,o=/^0b[01]+$/i,a=/^0o[0-7]+$/i,c=parseInt,u="object"==typeof global&&global&&global.Object===Object&&global,s="object"==typeof self&&self&&self.Object===Object&&self,f=u||s||Function("return this")(),l=Object.prototype.toString,p=Math.max,v=Math.min,g=function(){return f.Date.now()};function m(t,n,r){var i,o,a,c,u,s,f=0,l=!1,m=!1,b=!0;if("function"!=typeof t)throw new TypeError(e);function O(e){var n=i,r=o;return i=o=void 0,f=e,c=t.apply(r,n)}function y(e){var t=e-s;return void 0===s||t>=n||t<0||m&&e-f>=a}function N(){var e,t,r=g();if(y(r))return w(r);u=setTimeout(N,(t=n-((e=r)-s),m?v(t,a-(e-f)):t))}function w(e){return u=void 0,b&&i?O(e):(i=o=void 0,c)}function x(){var e,t=g(),r=y(t);if(i=arguments,o=this,s=t,r){if(void 0===u)return f=e=s,u=setTimeout(N,n),l?O(e):c;if(m)return u=setTimeout(N,n),O(s)}return void 0===u&&(u=setTimeout(N,n)),c}return n=d(n)||0,h(r)&&(l=!!r.leading,a=(m="maxWait"in r)?p(d(r.maxWait)||0,n):a,b="trailing"in r?!!r.trailing:b),x.cancel=function(){void 0!==u&&clearTimeout(u),f=0,i=s=o=u=void 0},x.flush=function(){return void 0===u?c:w(g())},x}function h(e){var t=typeof e;return!!e&&("object"==t||"function"==t)}function d(e){if("number"==typeof e)return e;if("symbol"==typeof(u=e)||(s=u)&&"object"==typeof s&&l.call(u)==n)return t;var u,s;if(h(e)){var f="function"==typeof e.valueOf?e.valueOf():e;e=h(f)?f+"":f}if("string"!=typeof e)return 0===e?e:+e;e=e.replace(r,"");var p=o.test(e);return p||a.test(e)?c(e.slice(2),p?2:8):i.test(e)?t:+e}var b,O,y,N,w=(b=function(){function e(e){return!isNaN(parseFloat(e))&&isFinite(e)}function t(e){return e.charAt(0).toUpperCase()+e.substring(1)}function n(e){return function(){return this[e]}}var r=["isConstructor","isEval","isNative","isToplevel"],i=["columnNumber","lineNumber"],o=["fileName","functionName","source"],a=r.concat(i,o,["args"]);function c(e){if(e instanceof Object)for(var n=0;n<a.length;n++)e.hasOwnProperty(a[n])&&void 0!==e[a[n]]&&this["set"+t(a[n])](e[a[n]])}c.prototype={getArgs:function(){return this.args},setArgs:function(e){if("[object Array]"!==Object.prototype.toString.call(e))throw new TypeError("Args must be an Array");this.args=e},getEvalOrigin:function(){return this.evalOrigin},setEvalOrigin:function(e){if(e instanceof c)this.evalOrigin=e;else{if(!(e instanceof Object))throw new TypeError("Eval Origin must be an Object or StackFrame");this.evalOrigin=new c(e)}},toString:function(){return(this.getFunctionName()||"{anonymous}")+"("+(this.getArgs()||[]).join(",")+")"+(this.getFileName()?"@"+this.getFileName():"")+(e(this.getLineNumber())?":"+this.getLineNumber():"")+(e(this.getColumnNumber())?":"+this.getColumnNumber():"")}};for(var u=0;u<r.length;u++)c.prototype["get"+t(r[u])]=n(r[u]),c.prototype["set"+t(r[u])]=function(e){return function(t){this[e]=Boolean(t)}}(r[u]);for(var s=0;s<i.length;s++)c.prototype["get"+t(i[s])]=n(i[s]),c.prototype["set"+t(i[s])]=function(t){return function(n){if(!e(n))throw new TypeError(t+" must be a Number");this[t]=Number(n)}}(i[s]);for(var f=0;f<o.length;f++)c.prototype["get"+t(o[f])]=n(o[f]),c.prototype["set"+t(o[f])]=function(e){return function(t){this[e]=String(t)}}(o[f]);return c}(),O=/(^|@)\S+\:\d+/,y=/^\s*at .*(\S+\:\d+|\(native\))/m,N=/^(eval@)?(\[native code\])?$/,{parse:function(e){if(void 0!==e.stacktrace||void 0!==e["opera#sourceloc"])return this.parseOpera(e);if(e.stack&&e.stack.match(y))return this.parseV8OrIE(e);if(e.stack)return this.parseFFOrSafari(e);throw new Error("Cannot parse given Error object")},extractLocation:function(e){if(-1===e.indexOf(":"))return[e];var t=/(.+?)(?:\:(\d+))?(?:\:(\d+))?$/.exec(e.replace(/[\(\)]/g,""));return[t[1],t[2]||void 0,t[3]||void 0]},parseV8OrIE:function(e){return e.stack.split("\n").filter(function(e){return!!e.match(y)},this).map(function(e){e.indexOf("(eval ")>-1&&(e=e.replace(/eval code/g,"eval").replace(/(\(eval at [^\()]*)|(\)\,.*$)/g,""));var t=e.replace(/^\s+/,"").replace(/\(eval code/g,"(").split(/\s+/).slice(1),n=this.extractLocation(t.pop()),r=t.join(" ")||void 0,i=["eval","<anonymous>"].indexOf(n[0])>-1?void 0:n[0];return new b({functionName:r,fileName:i,lineNumber:n[1],columnNumber:n[2],source:e})},this)},parseFFOrSafari:function(e){return e.stack.split("\n").filter(function(e){return!e.match(N)},this).map(function(e){if(e.indexOf(" > eval")>-1&&(e=e.replace(/ line (\d+)(?: > eval line \d+)* > eval\:\d+\:\d+/g,":$1")),-1===e.indexOf("@")&&-1===e.indexOf(":"))return new b({functionName:e});var t=/((.*".+"[^@]*)?[^@]*)(?:@)/,n=e.match(t),r=n&&n[1]?n[1]:void 0,i=this.extractLocation(e.replace(t,""));return new b({functionName:r,fileName:i[0],lineNumber:i[1],columnNumber:i[2],source:e})},this)},parseOpera:function(e){return!e.stacktrace||e.message.indexOf("\n")>-1&&e.message.split("\n").length>e.stacktrace.split("\n").length?this.parseOpera9(e):e.stack?this.parseOpera11(e):this.parseOpera10(e)},parseOpera9:function(e){for(var t=/Line (\d+).*script (?:in )?(\S+)/i,n=e.message.split("\n"),r=[],i=2,o=n.length;i<o;i+=2){var a=t.exec(n[i]);a&&r.push(new b({fileName:a[2],lineNumber:a[1],source:n[i]}))}return r},parseOpera10:function(e){for(var t=/Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i,n=e.stacktrace.split("\n"),r=[],i=0,o=n.length;i<o;i+=2){var a=t.exec(n[i]);a&&r.push(new b({functionName:a[3]||void 0,fileName:a[2],lineNumber:a[1],source:n[i]}))}return r},parseOpera11:function(e){return e.stack.split("\n").filter(function(e){return!!e.match(O)&&!e.match(/^Error created at/)},this).map(function(e){var t,n=e.split("@"),r=this.extractLocation(n.pop()),i=n.shift()||"",o=i.replace(/<anonymous function(: (\w+))?>/,"$2").replace(/\([^\)]*\)/g,"")||void 0;i.match(/\(([^\)]*)\)/)&&(t=i.replace(/^[^\(]+\(([^\)]*)\)$/,"$1"));var a=void 0===t||"[arguments not available]"===t?void 0:t.split(",");return new b({functionName:o,args:a,fileName:r[0],lineNumber:r[1],columnNumber:r[2],source:e})},this)}});window.onerror=function(t,n,r){var i=!0,o=!0;if("function"!=typeof t)throw new TypeError(e);return h(r)&&(i="leading"in r?!!r.leading:i,o="trailing"in r?!!r.trailing:o),m(t,n,{leading:i,maxWait:n,trailing:o})}(function(e,t,n,r,i){var o,a;i&&(o=w.parse(i)),window.location&&window.location.href&&(a=window.location.href),function(e){try{var t=new XMLHttpRequest;t.open("POST","/LogServlet",!0),t.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),t.send("javascriptError="+encodeURI(e))}catch(e){}}(JSON.stringify({userAgent:navigator.userAgent,url:a,logger:"apne_nettsider",message:e,source:t,lineno:n,colno:r,stacktrace:o}))},200)}()}catch(e){}
+        </script>
+    
+    
+
+    
+
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=yes"/>
+    <meta name="keywords" content="Not indexed"/>
+    
+    
+
+    
+        <meta itemprop="category" content="search-facet-tags:not-indexed"/>
+    
+
+    <!-- Open Graph General (Facebook & Pinterest) -->
+    <meta property="og:url" content="https://www.sparebank1.no/en/ostlandet/personal.html"/>
+    <meta property="og:title" content="Personal"/>
+    <meta property="og:description"/>
+    <meta property="og:image" content="https://www.sparebank1.no/content/dam/SB1/ikoner/GUI-ikoner/logo-sparebank1_ostlandet.svg.thumb.1280.1280.jpg"/>
+    <meta property="og:type" content="article"/>
+
+    <!-- Open Graph Article (Facebook & Pinterest) -->
+    <meta property="article:published_time" content="29.8.2023"/>
+    <meta property="article:modified_time" content="29.8.2023"/>
+
+    <!-- Twitter -->
+    <meta name="twitter:title" content="Personal"/>
+    <meta name="twitter:description"/>
+    <meta name="twitter:image:src" content="https://www.sparebank1.no/content/dam/SB1/ikoner/GUI-ikoner/logo-sparebank1_ostlandet.svg.thumb.768.768.jpg"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+
+    
+    
+    
+
+    <!-- Preload SB1 fonts -->
+    <link rel="preload" as="font" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/fonts/SpareBank1-Medium-Web.woff2" type="font/woff2" crossorigin/>
+    <link rel="preload" as="font" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/fonts/SpareBank1-Regular-Web.woff2" type="font/woff2" crossorigin/>
+    <link rel="preload" as="font" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/fonts/SpareBank1-Title-Medium-Web.woff2" type="font/woff2" crossorigin/>
+
+    <link rel="shortcut icon" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/favicon.ico"/>
+    <link rel="apple-touch-icon" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/apple-touch-icon.png"/>
+    <link rel="canonical" href="https://www.sparebank1.no/en/bank/personal.html"/>
+    <link rel="stylesheet" href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base.1156727806.css" type="text/css"/>
+    <title>Personal | SpareBank 1 Østlandet</title>
+    
+    <!--#config errmsg="" -->
+    
+    <!-- aem01-01 - 5.102.2 -->
+    
+
+    <script type="text/javascript">
+        var _satellite = {
+            track: function() {}
+        }
+    </script>
+
+    
+</head>
+
+
+
+<body class="ffe-body-text">
+<!-- Google Tag Manager (noscript) -->
+
+
+
+<!-- End Google Tag Manager (noscript) -->
+
+
+<script>
+    window.SB1 = {
+        config: {
+            app: {
+                logServlet: "/bin/logservlet",
+                param1: "",
+                param2: "all",
+                param3: "",
+                sendToBank: "",
+                sendToBankList: "",
+                sendToBankClose: "",
+                sendToBankDelay: "",
+                loggedInRedirectEnabled: "true",
+                urlList: "LogServlet,/bin/logservlet,/bin,/content/dam,/dynres,/restportal,static,/innhold,services.cicero.no,/kjopsprosess,/sb1-nettsider-skjema,/nettmote,.boost.ai/,https://publish.ne.cision.com/Subscription/Subscribe,dpm.demdex.net,sparebank1.d3.sc.omtrdc.net,/solr,/sb1-dialoghub,/openapi,edge.adobedc.net,/api/tracking/webbehavior,/pm-boliglan/,/api/personal/",
+                loginRedirectTimeout: "300000",
+                isLoginIframeCheckEnabled: "true",
+                chatDefaultOpen: "",
+                enableWebTracker: "true",
+                enableAlloyTarget: "true",
+                enableSendConsent: "false", // To be removed when we have streamed the consents for a period of time
+                adobeEdgeId: "62a5b863-224a-4ac5-96bf-3cc470a0f515",
+                version: "5.102.2"
+            },
+            user: {
+                language: "en"
+            },
+            global: {
+                logAjax: false
+            },
+            urls: {
+                marketPage: "/content/sites/sb1/en/ostlandet/personal.html",
+                gotoNettbank: ""
+            },
+            server: {
+            },
+            sites: {
+            },
+            page: {
+                tagVariables: "search\u002Dfacet\u002Dtags:not\u002Dindexed",
+                pageType: "Marked",
+                market: "Personal",
+                marketName: "personal",
+                brand: "sb1",
+                products: [{
+                    name:"",
+                    category: ""
+                }],
+                is404Page: "false",
+            },
+            bank: {
+                bankSemanticUrl: "ostlandet",
+                bankShortName: "ostlandet",
+                bankName: "SpareBank 1 Østlandet",
+                defaultLanguage: "nb",
+            }
+        }
+    };
+</script>
+
+<!-- Todo: remove this when all external components and Cicero calculator have switched to Signal -->
+<script>
+        digitalData = {
+            content: {
+                BU: "SpareBank 1",
+                subBrand: "ostlandet",
+                language: "en",
+                page: "sb1|en|ostlandet|personal:forside",
+                section1: "personal",
+                section2: "personal",
+                section3: "personal",
+                section4: "personal",
+                errorpages: "Nei",
+                pagetype: "Marked",
+                tags: "search\u002Dfacet\u002Dtags:not\u002Dindexed",
+                application: "sb1-nettsider"
+            }
+        };
+</script>
+
+<noscript>
+    <div>For at du skal kunne se innhold på SpareBank 1s nettsider optimalt, må du aktivere javascript i din nettleser.</div>
+</noscript>
+
+<div id="outer-main-wrap" class="main-wrap">
+    <!--[if lt IE 8]>
+        <script data-sly-test="true">
+            if(self !== top) {
+                document.getElementById('outer-main-wrap').style.display = 'none';
+                top.location = self.location;
+            }
+        </script> 
+    <![endif]-->
+    
+    
+    <nav class="page-nav">
+    <a href="#main-menu" class="visually-hidden focusable">Til hovedmeny</a>
+
+    <a href="#main-content" class="visually-hidden focusable">Til hovedinnhold</a>
+</nav>
+    
+    <aside aria-label="Message" role="complementary">
+        <div class="global-message">
+            <div class="li-information-message-blue js-ie-message-item hide" role="alert" aria-live="assertive" data-id="ie-no-longer-supported" data-button="Close">
+                
+            </div>
+            
+        </div>
+    </aside>
+
+
+<header class="header front-page ">
+    
+    
+    
+    
+    
+    <div class="header__wrap">
+        <div class="header__content  aem-main-container">
+            <div class="header__top-wrap">
+                <a class="header__search-mobile search-toggle" href="?search=" aria-label="Search" title="Search">
+                    <svg class="header__search-icon header__search-icon--open">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#forstorrelsesglass-ikon"></use>
+                    </svg>
+                    <svg class="header__search-icon header__search-icon--close">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#kryss-ikon"></use>
+                    </svg>
+                </a>
+
+                <div class="header__logo">
+<a href="https://www.sparebank1.no/en/ostlandet/personal.html">
+    
+    
+    
+
+    
+        
+    
+        <picture>
+            <img width="180" height="50" src="https://www.sparebank1.no/content/dam/SB1/ikoner/GUI-ikoner/logo-sparebank1_ostlandet.svg" alt="Logo SpareBank 1 Østlandet" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/ikoner/GUI-ikoner/logo-sparebank1_ostlandet.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+
+</a></div>
+
+                <button href="#" class="hamburger-wrapper" aria-hidden="false" aria-expanded="false" aria-label="Menu">
+                    <div class="inner-wrapper">
+                        <div class="hamburger"></div>
+                    </div>
+                </button>
+                
+                <div class="header__top-nav">
+                    <ul>
+                        <li data-title="Personal"><a class="js-nav-link active" href="https://www.sparebank1.no/en/ostlandet/personal.html">Personal</a></li>
+                    
+                        <li data-title="About us"><a class="js-nav-link " href="https://www.sparebank1.no/en/ostlandet/about-us.html">About us</a></li>
+                    </ul>
+                    
+                </div>
+           
+            </div>
+
+            <div class="header__user-content">
+                
+                    <div class="language-wrap hide-desktop-only">
+                        <svg class="language-icon language-icon--mobile">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#globe-ikon"></use>
+                        </svg>                   
+                        <label for="language-selection" class="visually-hidden"></label>
+                        <select id="language-selection" class="language-selection">
+                            <option disabled selected value="">Language</option>
+                            <option value="/content/sites/sb1/en/ostlandet/personal.html" data-locale="en">English</option>
+                            <option value="/content/sites/sb1/nb/ostlandet/privat.html" data-locale="no_NO">Norsk</option>
+                            
+                        </select>
+                    </div>
+                    <div class="language hide-phone-tablet language--1024">
+                        <button id="js-language-btn" class="language-btn" aria-controls="js-language-list" aria-expanded="false">
+                            <span class="ffe-button__label">
+                                <svg class="language-icon ffe-button__icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#globe-ikon"></use>
+                                </svg>
+                            </span>                
+                            <label class="visually-hidden">Language</label>
+                        </button>
+                        <ul id="js-language-list" class="language-list hide">
+                            <li>
+                                <a class="js-language-list__item" href="https://www.sparebank1.no/en/ostlandet/personal.html" id="lang-en" data-locale="en">English</a>
+                            </li>
+                            <li>
+                                <a class="js-language-list__item" href="https://www.sparebank1.no/nb/ostlandet/privat.html" id="lang-nb" data-locale="no_NO">Norsk</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                
+
+                <button aria-controls="search-area" class="header__search-desktop search-toggle " aria-label="Search">
+                    <svg class="header__search-icon header__search-icon--open">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#forstorrelsesglass-ikon"></use>
+                    </svg>
+                    <span>Search</span>
+                </button>
+
+                <div class=" menu-actions">
+
+                    <div id="header-bli-kunde" class="button">
+                        <div class="button-wrapper">
+                            
+                            
+                                <a onclick="" href="https://www.sparebank1.no/en/ostlandet/personal/new-customer.html" class="ffe-button ffe-button--action btn-bli-kunde ">Become customer</a>
+                            
+                        </div>
+                                        
+                    </div>
+                
+                    
+
+<div id="login" class="user-buttons todo-handle" data-gotourl="https://www.sparebank1.no/ostlandet/nettbank-privat/avtale/velg-avtale">
+
+    <a id="login-button" class="login-btn login" href="https://www.sparebank1.no/en/ostlandet/personal/login.html">
+        <span>Log in</span>
+    </a>
+
+    <a id="nettbank-button" class="goto-btn to-bank-button login-buttons" href="#/">
+        <span>Online bank</span>
+    </a>
+
+    <a id="forsikring-button" class="goto-btn to-forsikring login-buttons" href="https://kundeforsikring.sparebank1.no">
+        <span>Go to Insurance</span>
+    </a>
+
+    <button id="logout-button" class="logout-btn login-buttons" data-logout-url="/content/sites/sb1/en/ostlandet/personal/login/log-off.html">
+        <span>Log out</span>
+    </button>
+</div>
+
+<script type="text/javascript">
+
+    (function(){
+        try{
+            var loginSection = document.getElementById('login');
+            var nettBankButton = document.getElementsByClassName('to-bank-button')[0];
+            var loginButton = document.getElementById('login-button');
+            var bank = window.SB1 ? window.SB1.config.bank.bankShortName : '';
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "/openapi/nettsider/ressurser/"+ bank +"/user", true);
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 ){
+                    if (this.status == 200) {
+                        var result = JSON.parse(this.responseText);
+
+                        if (result.authenticated) {
+                            loginSection.dataset['authenticated'] = 'true';
+                            showButton(document.getElementById('logout-button'));
+                            addClass(loginSection,'mobile-border');
+
+                            var realms = result.realms;
+                            if (realms.length > -1) {
+                                var i = 0;
+                                //Viser kun en knapp denne runden
+                                //tilrettelegger for flere knapper i neste runde
+
+                                if (realms[i] == 'nettbank-bm') {
+                                    var nettbankUrl = '/'+ result.bank + '/nettbank-bedrift/forside';
+                                    var isMobilBank = nettBankButton.id === 'mobilbank-button';
+                                    if(isMobilBank) {
+                                        nettbankUrl = nettBankButton.href;
+                                    } else {
+                                        nettBankButton.href = nettbankUrl;
+                                    }
+
+                                    setGotoNettbankConf(nettbankUrl);
+                                    showButton(nettBankButton);
+
+                                } else if (realms[i] == 'nettbank-pm') {
+                                    nettBankButton.href = '/'+ result.bank + '/nettbank-privat/oversikt';
+                                    setGotoNettbankConf('/'+ result.bank + '/nettbank-privat/oversikt');
+
+                                    //DIG-116242 Skjule "Til bettbank" for SB1 forvaltning
+                                    if(window.location.href && window.location.href.indexOf("sb1-forvaltning") == -1) {
+                                        showButton(nettBankButton);
+                                    }
+
+                                } else if (realms[i] == 'forsikring-pm') {
+                                    showButton(document.getElementById('forsikring-button'));
+                                }
+
+                                loginButton.style.display='none';
+                                //Bli kunde button
+                                var bliKundeBtn = document.getElementById('header-bli-kunde');
+                                if (bliKundeBtn) {
+                                    bliKundeBtn.style.display='none';
+                                }
+                            }
+                        } else {
+                            setGotoNettbankConf(loginButton.href);
+                        }
+                    }else{
+                        setGotoNettbankConf(loginButton.href);
+                    }
+                }
+
+            };
+            xhttp.send();
+
+            function showButton(btn){
+                addClass(btn, 'login-buttons__show');
+            }
+
+            function setGotoNettbankConf(sUrl){
+                window.SB1.config.urls.gotoNettbank = sUrl;
+            }
+
+            function addClass(obj ,name) {
+                var arr;
+                arr = obj.className.split(" ");
+                if (arr.indexOf(name) == -1) {
+                    obj.className += " " + name;
+                }
+            }
+
+        }catch(exception){
+            document.getElementById('login-button').style.display = 'flex';
+        }
+    })();
+
+
+</script>
+
+
+                    
+                </div>
+
+            </div>
+
+            <nav id="main-menu" class="header__main-nav " aria-label="Main menu" tabindex="-1">
+                <ul>
+                    <li><a class=" js-nav-link" href="https://www.sparebank1.no/en/ostlandet/personal/new-customer.html">New Customer</a></li>
+                
+                    <li><a class=" js-nav-link" href="https://www.sparebank1.no/en/ostlandet/personal/online-banking.html">Online Banking</a></li>
+                
+                    <li><a class=" js-nav-link" href="https://www.sparebank1.no/en/ostlandet/personal/contact.html">Contact Us</a></li>
+                
+                    <li><a class=" js-nav-link" href="https://www.sparebank1.no/en/ostlandet/personal/customer-declaration.html">Customer declaration</a></li>
+                
+                    <li><a class=" js-nav-link" href="https://www.sparebank1.no/en/ostlandet/personal/update-customer-information.html">Update customer information</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</header>
+
+
+
+
+    <!-- Søke område -->
+    <div id="search-area" class="search-overlay hide " aria-expanded="false" aria-live="polite" role="search">
+
+        <div class="full-width-wrap">
+
+            <div class="aem-main-container search-overlay__close">
+                <button tabindex="0" class="search-overlay__close-btn js-search-close">
+                    <span class="ffe-strong-text">Close</span>
+                    <svg focusable="false">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#kryss-ikon"></use>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="inner-wrap">
+                
+                <div class="search-field-wrap">
+                    <form action=".">
+                        <input id="search-field" class="aem-input search-field" autocomplete="off" aria-label="Search" name="search" placeholder="Search" type="search"/>
+                    </form>
+
+                    <button class="search-button" aria-label="Search">
+                        <svg class="icon-search">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#forstorrelsesglass-ikon"></use>
+                        </svg>
+                    </button>
+                    <button class="search-clear-button hide">
+                        <svg class="icon-search-clear">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#kryss-ikon"></use>
+                        </svg>
+                    </button>
+                    <div class="spellchecking-wrap">
+                        
+                        <ul class="spellchecking hide"></ul>
+                    </div>
+                </div>
+                <div class="search-field-error ffe-field-error-message hide" role="alert">Do not write personal information in the search field. </div>
+                <div class="facet-wrap market-facets-wrap">
+                </div>
+            </div>
+        </div>
+        <div class="inner-wrap">
+            <div class="search-loading hide">
+                <span class="ffe-loading-spinner ffe-loading-spinner--large"></span>
+            </div>
+        </div>
+        <div class="inner-wrap">
+            <div class="search-results-wrap" aria-live="polite">
+                <div class="visually-hidden js-numresult" aria-hidden="true" role="alert"><span>0</span> search hits</div>
+                
+                <ul class="search-results"></ul>
+
+            </div>
+        </div>
+        <div class="search-empty" id="search-image--decorative">
+            
+        </div>
+        <div class="inner-wrap">
+            <div class="error-state hide"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function(){
+            try{
+                function iOS_macOS() {
+                    return ['iPad','iPhone'].includes(navigator.platform)
+                        || (navigator.userAgent.includes("Mac") ) //for safari desktop & iPad on iOS 13
+                }
+                //IOS og Safari mac cacher når man bruker back btn. JS kjøres ikke og søkefeltet blir tomt.
+                window.onpageshow = function(event) {
+                    if (event.persisted && iOS_macOS()) { //iOS og MacOS safari
+                        window.location.reload();                 
+                    }
+                };
+            }catch(exception){ }
+        })();
+    </script>
+
+
+
+
+
+    <main id="main-content" class="main marketpage" tabindex="-1">
+    
+
+        
+
+    <div class="send-to-bank-modal hide">
+        
+    </div>
+
+        
+    <div class="send-to-bank__loading js-send-to-bank-loading hide">
+        <span class="ffe-loading-spinner"></span>
+    </div>
+
+    
+            
+    <h1 class="visually-hidden" aria-hidden="false">Personal</h1>
+
+    
+    
+    
+    <div class="campaign parbase color-fillable">
+
+<div class="campaign__full-width ">
+	
+	
+
+    
+    
+    
+
+    
+    
+
+    <div class="ffe-grid campaign__wrap ">
+        <div class="ffe-grid__row campaign__wrap-bg  bg-color0" style="background-color:#">
+            <div class="ffe-grid__col--md-7 campaign-bg">
+                <div class="background mod-image campaign-bg__img ">
+                    
+    
+    
+
+    
+    
+        
+        
+                    
+
+    <div class="image-wrapper">
+        
+        
+            <picture>
+                <source srcset="/content/dam/SB1/bank/ostlandet/aboutus/Batliv_ostlandet.jpg.thumb.1280.1280.jpg" media="(min-width: 769px)"/>
+                <source srcset="/content/dam/SB1/bank/ostlandet/aboutus/Batliv_ostlandet.jpg.thumb.768.768.jpg" media="(max-width: 768px)"/>
+                <img src="https://www.sparebank1.no/content/dam/SB1/bank/ostlandet/aboutus/Batliv_ostlandet.jpg.thumb.1280.1280.jpg" alt="bildebank Sparebank1 Østlandet" class="responsive  iecb789 campaign-bg__img--center"/>
+            </picture>
+        
+    </div>
+
+    
+    
+    
+
+                </div>
+            </div>
+            <div class="ffe-grid__col--md-5 campaign__wrap-content">
+                <div class="campaign-content  campaign-bg__align-left">
+                    <div class="text ">
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    <h1>About us</h1>
+<p>We offer a full range of financial services within  areas such as loans, savings, advice, insurance and pensions for personal and corporate customers.  </p>
+
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+</div>
+                    <div class="button">
+      
+<div class="aem-component-container">
+
+    
+      
+    
+    <div class="button-wrapper left">
+        <a onclick="" class="action-btn ffe-button ffe-button--action     id-1329392675" href="https://www.sparebank1.no/en/ostlandet/about-us.html">
+            <span class="ffe-button__label">Read more
+                </span>
+                
+            </span>
+        </a>
+        
+    </div>
+
+    
+
+    
+    
+
+
+
+    
+
+    
+
+</div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div></div>
+
+
+    
+    
+    
+    <div class="text contentfragment">
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    <p>  </p>
+
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+</div>
+
+
+    
+    
+    
+    <div class="usp parbase">
+
+
+
+<div class="usp-wrap ">
+
+        
+
+        
+    
+    
+    
+    <div class="icon-list">
+<div class="icon-list__item">
+    <div class="icon-list__item-icon">
+        
+
+<div class="aem-component-container ">
+      <a href="https://www.sparebank1.no/en/ostlandet/personal/new-customer.html">
+            
+    
+    
+
+    
+        
+    
+        <picture>
+            <img src="https://www.sparebank1.no/content/dam/SB1/bank/ostlandet/illustrasjoner/ost-illustrasjon-dame-bli-kunde-usymmetrisk.svg" alt="Illustrasjon bli kunde" style="width:100%;" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/bank/ostlandet/illustrasjoner/ost-illustrasjon-dame-bli-kunde-usymmetrisk.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+
+      </a>
+</div>
+    </div>
+    <div class="icon-list__item-text">
+        <div class="text">
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    <p><span class="h6">Become a customer</span></p>
+<p><a href="https://www.sparebank1.no/en/ostlandet/personal/new-customer.html">Financial services tailored to your needs and an excellent mobile and internet bank.</a></p>
+
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+</div>
+    </div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="icon-list">
+<div class="icon-list__item">
+    <div class="icon-list__item-icon">
+        
+
+<div class="aem-component-container ">
+      <a href="https://www.sparebank1.no/en/ostlandet/personal/update-customer-information.html">
+            
+    
+    
+
+    
+        
+    
+        <picture>
+            <img src="https://www.sparebank1.no/content/dam/SB1/illustrasjoner/illustrasjon-kundeinfo.svg" alt="jente med infoboble" style="width:100%;" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/illustrasjoner/illustrasjon-kundeinfo.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+
+      </a>
+</div>
+    </div>
+    <div class="icon-list__item-text">
+        <div class="text">
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    <p><span class="h6">Update customer information</span><br />
+<a href="https://www.sparebank1.no/en/ostlandet/personal/update-customer-information.html?icid=forside;;customerinformation;;illustrasjon;;ostlandet;;personal">Received a message concerning updating customer information?</a></p>
+
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+</div>
+    </div>
+</div>
+</div>
+
+
+       
+        
+
+        
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="video parbase"><div class="aem-component-container">
+    <div class="responsive-parent">
+
+        <div class="video-wrap">
+            <!-- Add video icon in edit mode only so that editors can see the component in edit mode -->
+            
+            <!-- Don't add the iframe in edit mode, the AEM dialog system stops working -->
+
+            <img src="https://www.sparebank1.no/content/dam/SB1/nettsider/logo.svg" class="video-placeholder" alt="Video placeholder image"/>
+            <iframe title="This is SpareBank 1 Østlandet" data-video-url="https://www.youtube.com/watch?v=Z3U4rhQiRJ4" src="" class="lazyload lazyload--video" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</div></div>
+
+
+    
+    
+    
+    <div class="text-and-image parbase color-fillable">
+
+
+<div class="text-and-image--full-width ">
+    
+    <div class="text-and-image__wrap   " style="background-color:#">
+
+        <div class="ffe-grid ffe-grid--gap-none text-and-image__grid">
+            <div class="ffe-grid__row text-and-image__grid--center">
+                <div class="columns-grid__column ffe-grid__col--lg-offset-1 ffe-grid__col--lg-5 ffe-grid__col--md-6 ffe-grid__col--sm-12 text-and-image__grid-text">
+                    <div class="columns-grid__content">
+                        <div class="text text-and-image__text">
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    <h2>Investor relations</h2>
+<p>For financial information go to our investor relations section.</p>
+
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+</div>
+                        <div class="text-and-image__button button">
+      
+<div class="aem-component-container">
+
+    
+      
+    
+    <div class="button-wrapper left">
+        <a onclick="" class="primary-btn ffe-button ffe-button--primary     id-1637461490" href="https://www.sparebank1.no/en/ostlandet/about-us/investor.html">
+            <span class="ffe-button__label">Read more
+                </span>
+                
+            </span>
+        </a>
+        
+    </div>
+
+    
+
+    
+    
+
+
+
+    
+
+    
+
+</div>
+</div>
+                    </div>
+                </div>
+                <div class="columns-grid__column ffe-grid__col--lg-5 ffe-grid__col--md-6 ffe-grid__col--sm-12 text-and-image__grid-media">
+                    <div class="columns-grid__content">
+                        <div class="background-image">
+    
+    
+
+    
+    
+        
+        
+                    
+
+    <div class="image-wrapper">
+        <noscript class="lazyload lazyload--image">
+            <img src="https://www.sparebank1.no/content/dam/SB1/foto/profilbilder-liggende/refinansiering-mann-pc.jpg.thumb.1280.1280.jpg" alt="Mann på pc" class="responsive  " data-lazy-smallsrc="https://www.sparebank1.no/content/dam/SB1/foto/profilbilder-liggende/refinansiering-mann-pc.jpg.thumb.768.768.jpg" data-lazy-largesrc="https://www.sparebank1.no/content/dam/SB1/foto/profilbilder-liggende/refinansiering-mann-pc.jpg.thumb.1280.1280.jpg" data-lazy-breakpoint="768px"/>
+        </noscript>
+        
+    </div>
+
+    
+    
+    
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="become-customer parbase color-fillable">
+<div class="become-customer-wrapper clearfix" style="background-color:#005AA4">
+    <div class="customer-inner-wrapper aem-main-container">
+        <div class="content-text">
+            
+
+<div class="aem-component-container">
+    <h4 class="ffe-h4">
+        We offer a full range of financial services within the areas of loans, savings, advice, insurance and pensions for personal and corporate customers.
+    </h4>
+    
+</div>
+
+        </div>
+        <div class="content-button">
+            <div class="button">
+      
+<div class="aem-component-container">
+
+    
+      
+    
+    <div class="button-wrapper left">
+        <a onclick="" class="shortcut2-btn ffe-button ffe-button--shortcut     id-1779853793" href="https://www.sparebank1.no/en/ostlandet/personal/new-customer.html">
+            <span class="ffe-button__label">Get started
+                
+                    <svg viewBox="0 0 200 200" class="ffe-button__icon ffe-button__icon--right"><path d="m16.171492,41.999998c-4.143269,0-8.2852797,1.57464-11.4277496,4.706478-6.3249899,6.283609-6.3249899,16.499474,0,22.803034l84.0286676,83.76282c6.30496,6.30356,16.54928,6.30356,22.87426,0l83.60959-83.26412c6.32499-6.28361,6.32499-16.499477,0-22.803038-6.30496-6.30356-16.55553-6.30356-22.88051,0l-72.13806,71.893768-72.613438-72.373767c-3.14247-3.151781-7.29074-4.725174-11.433999-4.725174h-0.0188z"></path></svg></span>
+                
+            </span>
+        </a>
+        
+    </div>
+
+    
+
+    
+    
+
+
+
+    
+
+    
+
+</div>
+</div>
+        </div>
+    </div>
+</div></div>
+
+
+
+</main>
+
+
+    
+    
+        <script type="text/javascript">
+            const OPTIN_COOKIE_NAME = 'sb1-optin';
+            const OPTIN_AUTHENTICATED_COOKIE_NAME = 'sb1-optin-authenticated';
+
+            const matchV2 = document.cookie.match(new RegExp(`-v2=(.*?)`));
+            let hasOptinCookie = false;
+            if(matchV2) {
+                hasOptinCookie = true;
+            }else{
+                const match = document.cookie.match(new RegExp(`=(.*?)-v`));
+                hasOptinCookie = (match) ? true : false;
+            }             
+            
+            if (!hasOptinCookie){                 
+                // js fil
+                const scriptEle = document.createElement("script");
+                const JS_URL = "/sb1-nettsider-optin/bank/static/opt-in.js";
+                scriptEle.setAttribute("src", JS_URL);
+                scriptEle.setAttribute("type", "text/javascript");
+                scriptEle.setAttribute("async", true);
+                scriptEle.setAttribute("onerror", "optinScriptError=true;");
+
+                //css fil
+                const CSS_URL = "/sb1-nettsider-optin/bank/static/opt-in.css";
+                const cssEle = document.createElement('link');                
+                cssEle.setAttribute('rel', 'stylesheet');
+                cssEle.setAttribute('onerror', 'optinScriptError=true;');
+                cssEle.setAttribute('property', 'stylesheet');
+                cssEle.setAttribute('media', 'screen,print');
+                cssEle.setAttribute('type', 'text/css');
+                cssEle.setAttribute('href', CSS_URL);
+
+                // div element
+                const divEle = document.createElement('div');
+                divEle.setAttribute('id', 'opt-in');
+                divEle.setAttribute('data-trigger-modal', 'true');
+
+                document.body.appendChild(divEle);
+                document.body.appendChild(cssEle);
+                document.body.appendChild(scriptEle);
+            }
+        </script>
+        
+    
+
+
+
+<!-- Logs the URL to SB1 job advertisements if the console is open -->
+<script>
+     if (window.console && window.console.log) {
+    console.log(`
+    d8b          888      888               888      d888                         
+    Y8P          888      888               888     d8888                         
+                 888      888               888       888                         
+   8888  .d88b.  88888b.  88888b.  .d8888b  88888b.   888       88888b.   .d88b.  
+   "888 d88""88b 888 "88b 888 "88b 88K      888 "88b  888       888 "88b d88""88b 
+    888 888  888 888  888 888  888 "Y8888b. 888  888  888       888  888 888  888 
+    888 Y88..88P 888 d88P 888 d88P      X88 888 d88P  888   d8b 888  888 Y88..88P 
+    888  "Y88P"  88888P"  88888P"   88888P' 88888P" 8888888 Y8P 888  888  "Y88P"  
+    888                                                                           
+   d88P                                                                           
+ 888P"`);
+    console.log( '%chttps://www.jobbsb1.no', 'color: blue; text-decoration: underline; cursor: pointer;',);
+    }
+</script>
+    <footer class="footer-wrapper">
+    <div class="footer-top container-fluid">
+        
+<div class="contact-section ">
+
+    <h2>Contact us</h2>
+    
+
+<div class="aem-component-container">
+    
+    
+        
+        
+            <div class="text-wrapper">
+                
+                    
+                
+            </div>
+        
+
+        
+
+                
+    
+</div>
+
+
+    <div class="customer-action-wrap clearfix ">
+        <ul class="customer-action__list" role="tablist">
+
+            
+                
+<li class="customer-action__list-item" id="contact-tab1" data-menu-section="contact-call-template" aria-controls="panel1" role="tab">
+    <a href="#/" class="cs-action tab-section">
+        <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M800-480q-16 0-28.5-11.5T757-520q-13-93-78.5-158.5T520-757q-17-2-28.5-14T480-800q0-17 12-28.5t28-9.5q126 14 215 103t103 215q2 16-9.5 28T800-480Zm-167 0q-13 0-23-9t-15-24q-8-29-30.5-51.5T513-595q-15-5-24-15t-9-24q0-20 14-32.5t31-8.5q56 13 96.5 53.5T675-525q4 17-9 31t-33 14Zm165 360q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
+        </div>
+        <span class="btn-name">Call</span>
+        <span class="sub-info">Every day 7-24</span>
+    </a>
+    <div class="icon">
+        <svg class="arrow-down">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#chevron-ikon"></use>
+        </svg>
+    </div>
+</li>
+
+
+            
+
+            
+                
+<li class="customer-action__list-item" id="contact-tab2" data-menu-section="contact-appointment-template" aria-controls="panel2" role="tab">
+    <a id="meeting" href="#/" class="cs-action tab-section">
+        <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+        </div>
+
+        <span class="btn-name">Appointment</span>
+        <span class="sub-info">Book a meeting</span>
+    </a>
+    <div class="icon">
+        <svg class="arrow-down">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#chevron-ikon"></use>
+        </svg>
+    </div>
+</li>
+
+
+            
+
+            
+                
+<li class="customer-action__list-item" id="contact-tab3" data-menu-section="contact-message-template" aria-controls="panel3" role="tab">
+    <a id="message" href="#/" class="cs-action tab-section">
+        <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg>
+        </div>
+        <span class="btn-name">Send email</span>
+        <span class="sub-info"></span>
+    </a>
+    <div class="icon">
+        <svg class="arrow-down">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#chevron-ikon"></use>
+        </svg>
+    </div>
+</li>
+
+
+
+
+            
+
+            
+                
+
+
+
+            
+
+            
+                
+
+
+
+            
+
+        </ul>
+
+        
+
+        
+        
+    
+    <div aria-hidden="true" id="contact-call-template" class="hide">
+        <div id="panel1" class="contact-info-section" aria-labelledby="contact-tab1" role="tabpanel">
+            <div class="call-section">
+                <div class="call-banks">
+
+
+
+</div>
+                <div class="contact-box call-section">
+                    
+                    <ul class="call-section__list">                        
+                        
+    
+    
+    
+    <li class="call-option__list-item">
+
+
+
+<h3 class="ffe-h4">Phone</h3>
+<div class="call-option__main-number ffe-h1">
+    <a class="call-option__number-link" href="tel:91507040"><span class="call-option__icon icon-phone"></span>915 07040</a>
+</div>
+<div class="call-option__sub-info">
+    <div class="call-option__sub-text ffe-h">
+        <span>From overseas</span>
+        <a href="tel:+4791507040" class="call-option__sub-number">+47 915 07040</a>
+    </div>
+    
+        <span class="call-option__sub-text">Every day 7-24</span>
+    
+</div>
+</li>
+
+
+                    </ul>
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        
+        
+
+<div aria-hidden="true" id="contact-appointment-template" class="hide">
+
+    <div id="panel2" class="contact-info-section" aria-labelledby="contact-tab2" role="tabpanel">
+        <section class="contact-box appointment-section">
+            
+            <div>
+
+    
+
+    
+
+    <form method="post" class="form-content contact-us-form" name="Meeting Form" data-receiver="contacts.email.hq" data-receiver-extra="contacts.email.hq" data-form-type="Kontakt" data-appendofficetosubject="true" data-subject="Fra nettsidene, avtal møte" novalidate>
+
+        <div class="appointment-section__group">
+            
+    <div class="ffe-message-box ffe-message-box--error error-summary-wrap" role="alert">
+        <span class="ffe-message-box__icon">
+            <svg class="error-summary-wrap__icon" focusable="false" viewBox="0 0 200 200" width="150" height="150" x="1650" y="450">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#utropstegn-ikon"></use>
+            </svg>
+        </span>
+        <div class="ffe-message-box__box">
+            <span class="ffe-h4 ffe-message-box__title">Please fix these errors</span>
+            <ul class="ffe-message-box__list error-msg"></ul>
+        </div>
+    </div>
+
+
+            <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message input checkbox-group">
+
+                <fieldset class="ffe-fieldset subjectList appointment-section__subject-list" id="adviceCollection" data-required="true" required="true">
+                    <legend class="ffe-h4">What do you want to talk about? (Required)</legend>
+                    
+                        <div class="checkbox-item">
+                            <input class="ffe-hidden-checkbox" type="checkbox" value="Savings" name="Savings" data-add-to-subject="true"/>
+                            <label class="ffe-checkbox">Savings</label>
+                        </div>
+                    
+                        <div class="checkbox-item">
+                            <input class="ffe-hidden-checkbox" type="checkbox" value="Loan" name="Loan" data-add-to-subject="true"/>
+                            <label class="ffe-checkbox">Loan</label>
+                        </div>
+                    
+                        <div class="checkbox-item">
+                            <input class="ffe-hidden-checkbox" type="checkbox" value="Insurance" name="Insurance" data-add-to-subject="true"/>
+                            <label class="ffe-checkbox">Insurance</label>
+                        </div>
+                    
+                        <div class="checkbox-item">
+                            <input class="ffe-hidden-checkbox" type="checkbox" value="Daily use" name="Daily use" data-add-to-subject="true"/>
+                            <label class="ffe-checkbox">Daily use</label>
+                        </div>
+                    
+                </fieldset>
+
+                
+
+                
+
+                <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                    <span></span>
+                </div>
+            </div>
+
+            
+
+            <fieldset class="ffe-fieldset">
+                <legend class="ffe-h4">When do you want the meeting?</legend>
+                <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message dropdown input">
+                    <label class="ffe-form-label">Choose day</label>
+                    <select class="ffe-dropdown" name="Contact name for appointment day">
+                        <option disabled selected value="">Choose day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                    </select>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="ffe-input-group dropdown ffe-input-group--no-extra-margin ffe-input-group--message input bank-opentimes">
+                    <label class="ffe-form-label">Choose time</label>
+                    <select class="ffe-dropdown" name="Choose time">
+                        <option disabled selected value="">Choose time</option>
+                        <option class="bank-opentimes__opentime" data-bank-value="Between 08.00 - 11.00" data-online-value="Between 08.00 - 11.00">Between 08.00 - 11.00</option>
+                        <option class="bank-opentimes__opentime" data-bank-value="Between 11.00 - 13.00" data-online-value="Between 11.00 - 13.00">Between 11.00 - 13.00</option>
+                        <option class="bank-opentimes__opentime" data-bank-value="Between 13.00 - 15.00" data-online-value="Between 13.00 - 15.00">Between 13.00 - 15.00</option>
+                    </select>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+
+                <div id="pick-a-bank" class="ffe-input-group dropdown input js-local-office  ">
+                    <label class="ffe-form-label">Choose your local branch</label>
+                    <select class="ffe-dropdown" name="Choose your local branch">
+                        <option disabled selected>Choose your local branch</option>
+                        
+                            <option value="Alvdal">Alvdal</option>
+                        
+                            <option value="Asker">Asker</option>
+                        
+                            <option value="Brumunddal">Brumunddal</option>
+                        
+                            <option value="Eidsvoll">Eidsvoll</option>
+                        
+                            <option value="Elverum">Elverum</option>
+                        
+                            <option value="Engerdal">Engerdal</option>
+                        
+                            <option value="Flisa">Flisa</option>
+                        
+                            <option value="Fornebu">Fornebu</option>
+                        
+                            <option value="Gjøvik">Gjøvik</option>
+                        
+                            <option value="Grorud">Grorud</option>
+                        
+                            <option value="Hamar Torggata">Hamar Torggata</option>
+                        
+                            <option value="Hamar Storhamar">Hamar Storhamar</option>
+                        
+                            <option value="Jessheim">Jessheim</option>
+                        
+                            <option value="Kirkenær">Kirkenær</option>
+                        
+                            <option value="Kongsvinger">Kongsvinger</option>
+                        
+                            <option value="Koppang">Koppang</option>
+                        
+                            <option value="Lillehammer">Lillehammer</option>
+                        
+                            <option value="Lillestrøm">Lillestrøm</option>
+                        
+                            <option value="Lørenskog">Lørenskog</option>
+                        
+                            <option value="Løten">Løten</option>
+                        
+                            <option value="Majorstuen">Majorstuen</option>
+                        
+                            <option value="Moelv">Moelv</option>
+                        
+                            <option value="Oslo sentrum - Youngstorget">Oslo sentrum - Youngstorget</option>
+                        
+                            <option value="Otnes">Otnes</option>
+                        
+                            <option value="Rena">Rena</option>
+                        
+                            <option value="Sandvika">Sandvika</option>
+                        
+                            <option value="Skarnes">Skarnes</option>
+                        
+                            <option value="Ski">Ski</option>
+                        
+                            <option value="Skotterud">Skotterud</option>
+                        
+                            <option value="Stange">Stange</option>
+                        
+                            <option value="Tingnes">Tingnes</option>
+                        
+                            <option value="Trysil">Trysil</option>
+                        
+                            <option value="Tveita">Tveita</option>
+                        
+                            <option value="Tynset">Tynset</option>
+                        
+                            <option value="Våler">Våler</option>
+                        
+                            <option value="Økern">Økern</option>
+                        
+                            <option value="Årnes">Årnes</option>
+                        
+                    </select>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message input textarea">
+                <label class="ffe-form-label">Tell us what you would like to talk about</label>
+                <textarea class="ffe-textarea input-message" name="Tell us what you would like to talk about"></textarea>
+                <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                    <span></span>
+                </div>
+            </div>
+
+            <fieldset class="ffe-fieldset" required="true">
+                <legend class="ffe-h4">Your name (Required)</legend>
+
+                <div class="ffe-input-group textfield ffe-input-group--no-extra-margin ffe-input-group--message input">
+                    <label class="ffe-form-label">Name (Required)</label>
+                    <input type="text" class="ffe-input-field" name="Name" required="true"/>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message textfield input hide">
+                    <label class="ffe-form-label">Company name (Required)</label>
+                    <input type="text" class="ffe-input-field" name="Company name"/>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+                
+                <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message email input">
+                    <label class="ffe-form-label">Email (Required)</label>
+                    <input type="email" class="ffe-input-field" name="Email" required="true"/>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="ffe-input-group ffe-input-group--no-extra-margin ffe-input-group--message phone-number input">
+                    <label class="ffe-form-label">Phone (Required)</label>
+                    <input type="tel" class="ffe-input-field" name="Phone" required="true"/>
+                    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+                        <span></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-buttons">
+                <div class="button-wrapper">
+                    <button id="online-meeting-submit" class="ffe-button ffe-button--action js-submit-button">
+                        <span class="ffe-button__label">
+                            Send message
+                        </span>
+                        <span class="ffe-button__spinner" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+        </section>
+    </div>
+</div>
+
+        
+        
+
+<div aria-hidden="true" id="contact-message-template" class="hide">
+    <div id="panel3" aria-labelledby="contact-tab3" class="contact-info-section" role="tabpanel">
+        <section class="contact-box message-section">
+            
+
+            
+            <div>
+    <div class="message-section__selection">
+        <div class="message-section__buttons-wrapper clearfix">
+            
+            <p class="lead">If you are a customer, you can send us a message in the online bank.</p>
+            <div class="ffe-button-group ffe-button-group--thin">                
+                <a href="https://www.sparebank1.no/en/ostlandet/personal/login.html" class="ffe-button ffe-button--primary">
+                    <span class="ffe-primary-button__text">I&#39;m a customer</span>
+                </a>            
+                <a href="#/" role="button" aria-controls="#messageForm" class="message-section__show-form ffe-button ffe-button--primary">
+                    <span class="ffe-primary-button__text">I&#39;m not a customer</span>
+                </a>                
+            </div>            
+        </div>
+        <div class="message-section__button-wrapper hide">
+            
+            <p class="lead"></p>
+            <a href="https://www.sparebank1.no/ostlandet/nettbank-privat/meldinger#/ny-melding" class="ffe-button ffe-button--primary">
+                <span class="ffe-primary-button__text">To the online bank</span>
+            </a>
+        </div>
+    </div>
+    <div id="messageForm" class="message-section__form hide">
+        <h3 class="message-section__title ffe-h4">How may we help you?</h3>
+        
+<div class="aem-component-container">
+    
+    <form class="clearfix form-content form-generator" data-receiver="contacts.email.hq" data-form-type="Kontakt" name="Message Form" novalidate>
+        
+    <div class="ffe-message-box ffe-message-box--error error-summary-wrap" role="alert">
+        <span class="ffe-message-box__icon">
+            <svg class="error-summary-wrap__icon" focusable="false" viewBox="0 0 200 200" width="150" height="150" x="1650" y="450">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#utropstegn-ikon"></use>
+            </svg>
+        </span>
+        <div class="ffe-message-box__box">
+            <span class="ffe-h4 ffe-message-box__title">Please fix these errors</span>
+            <ul class="ffe-message-box__list error-msg"></ul>
+        </div>
+    </div>
+
+
+        
+    
+    
+    
+    <div class="textfield input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="First name">
+    First name (Required)
+    
+
+
+</label>
+    <input type="text" class="ffe-input-field" name="First name" required="true"/>
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="textfield input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="Last name">
+    Last name (Required)
+    
+
+
+</label>
+    <input type="text" class="ffe-input-field" name="Last name" required="true"/>
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="email input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="E-mail">
+    E-mail (Required)
+    
+
+
+</label>
+    <input type="email" class="ffe-input-field" name="E-mail" required="true"/>
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="phone-number input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="Phonenumber">
+    Phonenumber (Required)
+    
+
+
+</label>
+    <input type="tel" class="ffe-input-field" id="Phonenumber" name="Phonenumber" required="true"/>
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="dropdown input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="Subject">
+    Subject (Required)
+    
+
+
+</label>
+    
+<select name="Subject" class="ffe-dropdown select-subject" required="true">
+    <option disabled selected>Select from list</option>
+    
+        <option value="Banking">Banking</option>
+    
+        <option value="Insurance">Insurance</option>
+    
+        <option value="Technical question">Technical question</option>
+    
+</select>
+
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+    
+    
+    
+    <div class="textarea input parbase"><div class="ffe-input-group ffe-input-group--message ffe-fieldset--no-extra-margin">
+    
+<label class="ffe-form-label js-form-label" data-analytics-label="Message">
+    Message (Required)
+    
+
+
+</label>
+    <textarea name="Message" class="ffe-textarea" required="true"></textarea>
+    <div class="sb1_form_validation_error ffe-field-error-message" role="alert" aria-live="assertive">
+    <span></span>
+</div>
+</div>
+</div>
+
+
+        <div class="form-buttons">
+            <div class="button-wrapper">
+                <button id="2110614687" class="ffe-button ffe-button--action js-submit-button" type="submit">
+                    <span class="ffe-button__label">
+                        Send message
+                    </span>
+                    <span class="ffe-button__spinner" aria-hidden="true" aria-label="Vennligst vent"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+    </div>
+</div>
+        </section>
+    </div>
+</div>
+
+        
+        
+
+
+
+
+
+        
+        
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+        <a href="#/" class="to-top" tabindex="-1" aria-hidden="true">
+    <span class="visually-hidden">Til toppen</span>
+    <span class="icon-holder">
+        <svg class="arrow-up">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#chevron-ikon"></use>
+        </svg>
+    </span>
+</a>
+
+    </div>
+    <div class="footer-bottom ">
+        <div class="bottom-content container-fluid">
+            
+
+
+
+
+
+
+
+
+
+
+    <div class="footer-bottom__columns footer-bottom__columns-space">
+
+        <div class="footer-bottom__column">
+            
+
+            
+
+            
+        </div>
+
+        <div class="footer-bottom__column footer-bottom__column-right">
+            <div class="footer-bottom__column-links footer-bottom__social-links">
+                <h2 class="ffe-h4">Social media</h2>
+                <ul>
+                    <li>
+                        <a class="social-logo" href="https://www.facebook.com/sb1ostlandet" target="_blank" rel="noopener" title="Facebook">
+                            
+
+<div class="aem-component-container ">
+      
+            <div class="Left">
+    
+    
+
+    
+        
+    
+        <picture>
+            <img role="presentation" src="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/facebook-hvit.svg" style="width:100%;" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/facebook-hvit.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+</div>
+      
+</div>
+                            <span class="visually-hidden">Facebook</span>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="social-logo" href="https://twitter.com/sb1ostlandet" target="_blank" rel="noopener" title="Twitter">
+                            
+
+<div class="aem-component-container ">
+      
+            <div class="Left">
+    
+    
+
+    
+        
+    
+        <picture>
+            <img role="presentation" src="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/twitter-hvit.svg" style="width:100%;" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/twitter-hvit.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+</div>
+      
+</div>
+                            <span class="visually-hidden">Twitter</span>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="social-logo" href="https://instagram.com/sparebank1ostlandet" target="_blank" rel="noopener" title="Instagram">
+                            
+
+<div class="aem-component-container ">
+      
+            <div class="Left">
+    
+    
+
+    
+        
+    
+        <picture>
+            <img role="presentation" src="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/instagram-hvit.svg" style="width:100%;" class="inline-svg responsive "/>
+        </picture>
+
+    <!--Fallback for no svg support from SoMe scrapers-->
+    <link rel="image_src" itemprop="image" href="https://www.sparebank1.no/content/dam/SB1/ikoner/SoMe/instagram-hvit.svg.thumb.1280.1280.jpg"/>
+    
+
+    
+
+        
+    
+    
+    
+    
+</div>
+      
+</div>
+                            <span class="visually-hidden">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom__column-links footer-bottom__language">
+                <svg class="language-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base/resources/images/symbol/ffe-icons.svg#globe-ikon"></use>
+                </svg>
+                <label for="language-selection--footer" class="visually-hidden"></label>
+                <select id="language-selection--footer" class="language-selection js-footer-lang">
+                    <option disabled selected value="">Language </option>
+                    <option value="/content/sites/sb1/en/ostlandet/personal.html">English</option>
+                    <option value="/content/sites/sb1/nb/ostlandet/privat.html">Norsk</option>
+                    
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom__column-links footer-bottom__small-links ">
+        <ul>
+            <li><a class="ffe-link-text" href="https://www.sparebank1.no/nb/ostlandet/om-oss/om-banken/selskapsinformasjon.html">About SpareBank 1 Østlandet (NO)</a></li>
+        
+            <li><a class="ffe-link-text" href="https://www.sparebank1.no/nb/ostlandet/om-oss/personvern/generelle-vilkar.html">Terms of use of the website (NO)</a></li>
+        
+            <li><a class="ffe-link-text" href="https://www.sparebank1.no/en/ostlandet/about-us/privacy-policy.html">Privacy policy</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-bottom__address">
+        <p>SpareBank 1 Østlandet, Strandgata 15, Hamar</p>
+        
+    </div>
+
+        </div>
+    </div>
+</footer>
+
+
+</div>
+
+<div class="hide" id="translated-text">
+
+	{
+		"EMAIL_FIELD_ERROR": "",
+		"CHECKBOX_ERROR": "",
+		"CHECKBOX_GROUP_ERROR": "Choose one of the options",
+		"DROPDOWN_ERROR": "",
+		"DATE_TO_FROM_ERROR": "",
+		"RADIO_ERROR": "",
+		"POSTAL_CODE_ERROR": "",
+		"TEXT_FIELD_ERROR": "",
+		"TEXT_FIELD_CONTENTS_ERROR": "",
+		"ACCOUNT_FIELD_ERROR": "",
+		"ORGANISATION_FIELD_ERROR": "",
+		"SSN_ERROR": "",
+		"PHONE_ERROR": "",
+		"MOBILE_PHONE_NO_ERROR": "Skriv inn et gyldig norsk mobilnummer (8 siffer)",
+		"SEARCH_ALLE": "All",
+		"MORE_INFO": "",
+		"RESULT_TYPE_BANK": "",
+		"RESULT_TYPE_ADVISOR": "",
+		"VIEW_IN_MAP": "View in map",
+		"BEFORE_COUNT_TEXT": "Du har",
+		"AFTER_COUNT_TEXT": "oppgave som venter på deg",
+		"AFTER_COUNT_TEXT_PLURAL": "oppgaver som venter på deg",
+		"MINE_OPPGAVER_LINK_TEXT": "Sjekk mine oppgaver",
+		"MINE_OPPGAVER_CLOSE_TEXT": "Ikke nå",
+        "MINE_OPPGAVER_COUNT_TEXT": "en",
+		"FORM_ERROR_LABEL":"Error",
+		"FORM_SUCCESS_LABEL":"Thank you for your inquiry
+",
+		"TEXT_FIELD_LENGTH_ERROR":"TEXT_FIELD_LENGTH_ERROR",
+		"TEXTAREA_FIELD_LENGTH_ERROR":"Max 2000 characters",
+		"NUMBER_ERROR": "Du kan kun skrive inn tall.",
+		"SEC_BLOCKER_DROPDOWN_DEFAULT": "Select country",
+		"GLOBAL_SEARCH_NO_RESULT_TEXT": "No result for",
+		"GLOBAL_SEARCH_FACET_LABEL": "Show hits for",
+		"MODAL_CLOSE": "Close",
+		"SEND_TO_BANK_BEFORE_INFO_TEXT": "Would you like to be sent directly to",
+		"SEND_TO_BANK_AFTER_INFO_TEXT": "the next time?",
+		"SEND_TO_BANK_NEXT_BUTTON_TEXT": "Yes",
+		"SEND_TO_BANK_CANCEL_BUTTON_TEXT": "Not now",
+		"SEND_TO_BANK_NEXT_DISCLAMER_TEXT": "For at du skal slippe å velge bank hver gang, bruker vi funksjonelle informasjonskapsler som lagrer hvordan du bruker nettsidene og hvilke innstillinger du har gjort."
+	}
+
+</div>
+
+
+
+<script type="text/javascript" src="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/vendors_bundle.1156727806.js"></script>
+<script type="text/javascript" src="https://www.sparebank1.no/etc.clientlibs/settings/wcm/designs/sb1/nettsider/clientlib_base.1156727806.js"></script>
+
+
+<!-- Remove aem ghost nodes -->
+<script> 
+    try{
+        [].slice.call(document.getElementsByClassName('ghost')).forEach(function (element){ element.parentNode.removeChild(element);});
+    }catch(e) {}
+</script> 
+
+
+
+    
+        <script defer="true" type="text/javascript" src="https://www.sparebank1.no/bank/dialoghub/static/integration.js?fid=fid-ostlandet"></script>
+   
+      
+      <script type="module" src="/src/index.tsx"></script>
+
+
+</body>
+
+</html>

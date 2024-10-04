@@ -1,5 +1,6 @@
 import React from "react";
 import Control from "./Control";
+import { TestOverview } from "./Test";
 
 String.prototype.replaceAt = function (index, replacement) {
   return (
@@ -94,7 +95,7 @@ class App extends React.Component {
 
     this.state = {
       greyscale: false,
-      controlsOpen: false,
+      controlsOpen: true,
       fontScale: 100,
       baseFontSize,
       elementType: false,
@@ -271,15 +272,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Press any key!
-        {this.state.controlsOpen && (
-          <Control
-            toggleGreyScale={this.toggleGreyScale}
-            toggleElementType={this.toggleElementType}
-            toggleDisableStyles={this.toggleDisableStyles}
-            toggleBlur={this.toggleBlur}
-          />
-        )}
+        {/* {this.state.controlsOpen && ( */}
+        <TestOverview />
+        <Control
+          toggleGreyScale={this.toggleGreyScale}
+          toggleElementType={this.toggleElementType}
+          toggleDisableStyles={this.toggleDisableStyles}
+          toggleBlur={this.toggleBlur}
+        />
+        {/* // )} */}
       </div>
     );
   }
