@@ -21,7 +21,6 @@ const state = {
 };
 
 const toggleProperty = (property) => {
-  console.log("test", document.body);
   if (state[property]) {
     document.body.classList.remove(property);
   } else {
@@ -34,85 +33,99 @@ const toggleGreyScale = () => {
   toggleProperty("greyscale");
 };
 
-const style = document.createElement("style");
-style.id = "derp";
-style.innerHTML = `
+window.onload = () => {
+  const style = document.createElement("style");
+  style.innerHTML = `
+  
+  .blur25{
+    filter:blur(1px);
+  }
+  
+  .blur30{
+    filter:blur(3px);
+  }
+  
+  .blur40{
+    filter:blur(6px);
+  }
+  
+  .greyscale {
+    filter: grayscale(1);
+  }
+  
+  .elementType h1::before{
+    content: '<H1>'
+  }
+  .elementType h2::before{
+    content: '<H2>'
+  }   
+  .elementType h3::before{
+    content: '<H3>'
+  }
+  .elementType h4::before{
+    content: '<H4>'
+  }
+  .elementType h5::before{
+    content: '<H5>'
+  }
+  .elementType h6::before{
+    content: '<H6>'
+  }
+  .elementType a::before{
+    content: '<A(Link)>'
+  }
+  .elementType button::before{
+    content: '<Button>'
+  }
+  .elementType ul::before{
+    content: '<UnorderedList>'
+  }
+  .elementType li::before{
+    content: '<ListItem>'
+  }
+  .elementType ol::before{
+    content: '<OrderedList>'
+  }
+  .elementType p::before{
+    content: '<P>'
+  }
+  .elementType label::before{
+    content: '<Label>'
+  }
+  .elementType select::before{
+    display:block;
+    content: '<Select>'
+  }
+  .elementType input::before{
+    content: '<Input>'
+  }
+  .elementType textarea::before{
+    content: '<Teatarea>'
+  }
+  .elementType table::before{ // works?
+    content: '<Table>'
+  }
+  .elementType section::before{
+    content: '<Section>'
+  }
+  `;
+  document.head.appendChild(style);
+  console.log("geyrdsacel");
+};
 
+document.addEventListener("wheel", handleScroll);
 
-.blur25{
-  filter:blur(1px);
-}
+function handleScroll(event) {
+  if (!event.shiftKey) return;
 
-.blur30{
-  filter:blur(3px);
-}
+  let scale = state.fontScale;
+  if (event.wheelDelta > 0) {
+    scale += 25;
+  } else {
+    scale -= 25;
+  }
 
-.blur40{
-  filter:blur(6px);
+  state.fontScale = scale;
+  document.documentElement.style.fontSize =
+    (state.baseFontSize * scale) / 100 + "px";
 }
-
-.greyscale {
-  filter: grayscale(1);
-}
-
-.elementType h1::before{
-  content: '<H1>'
-}
-.elementType h2::before{
-  content: '<H2>'
-}   
-.elementType h3::before{
-  content: '<H3>'
-}
-.elementType h4::before{
-  content: '<H4>'
-}
-.elementType h5::before{
-  content: '<H5>'
-}
-.elementType h6::before{
-  content: '<H6>'
-}
-.elementType a::before{
-  content: '<A(Link)>'
-}
-.elementType button::before{
-  content: '<Button>'
-}
-.elementType ul::before{
-  content: '<UnorderedList>'
-}
-.elementType li::before{
-  content: '<ListItem>'
-}
-.elementType ol::before{
-  content: '<OrderedList>'
-}
-.elementType p::before{
-  content: '<P>'
-}
-.elementType label::before{
-  content: '<Label>'
-}
-.elementType select::before{
-  display:block;
-  content: '<Select>'
-}
-.elementType input::before{
-  content: '<Input>'
-}
-.elementType textarea::before{
-  content: '<Teatarea>'
-}
-.elementType table::before{ // works?
-  content: '<Table>'
-}
-.elementType section::before{
-  content: '<Section>'
-}
-`;
-
-document.head.appendChild(style);
-
-document.addEventListener("wheel", this.handleKeyDown);
-document.addEventListener("keyup", this.handleKeyUp);

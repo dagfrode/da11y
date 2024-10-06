@@ -13,15 +13,15 @@
 
 export const testCategories = [
   {
-    title: "Automated testing",
-    description: "desk",
+    title: "Keyboard",
+    description: "For this category of tests you will only use your keyboard and look at how using the keyboard to navigate the page affects it",
     tests: [
       {
         title: "Access all functions",
         multimedia: false,
         moreAboutThisTest: "url",
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria: "1.1.1",
         description: `Can you use the keyboard to access all functions of the page? No need
           for the mouse at all? No getting stuck in some input elment or modal?`,
       },
@@ -30,7 +30,7 @@ export const testCategories = [
         multimedia: false,
         moreAboutThisTest: "url",
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria:  "1.2.1",
         description: `Does the order the focus is moved make sense?`,
       },
       {
@@ -38,7 +38,7 @@ export const testCategories = [
         multimedia: false,
         moreAboutThisTest: "url",
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria:  "1.2.1",
         description: `Can you see where the focus is at all times? Even after filling in
         information?`,
       },
@@ -47,7 +47,7 @@ export const testCategories = [
         multimedia: false,
         moreAboutThisTest: "url",
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria: "1.2.1",
         description: `Does the webpage stay the same when moving the
         focus / entering information?`,
       },
@@ -65,7 +65,7 @@ export const testCategories = [
         moreAboutThisTest: "url",
 
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria:  "1.2.1",
         description: "Use the keyboard to",
       },
     ],
@@ -81,7 +81,7 @@ export const testCategories = [
         moreAboutThisTest: "url",
 
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria:  "1.2.1",
         description: "Use the keyboard to",
       },
       {
@@ -92,7 +92,7 @@ export const testCategories = [
         moreAboutThisTest: "url",
 
         roles: ["dev", "design", "test"],
-        successCriteria: ["1.1.1", "1.2.1"],
+        successCriteria:  "1.2.1",
         description: "Use the keyboard to",
       },
     ],
@@ -124,6 +124,10 @@ export const successCriteria = {
     uuTilsynetLink: "",
   },
 };
+
+export type TestCategory = typeof testCategories[0]
+const test = testCategories[0].tests[0]
+export type Test = typeof test
 
 // WCAG 2
 // 4 principles

@@ -1,41 +1,42 @@
+import { useState } from "react";
 import styles from "./Start.module.less";
+import { Review, ROLE, Role } from "../../types";
 
-export const ROLE = {
-    DEVELOPER: "developer",
-    DESIGNER: "designer",
-    TESTER: "tester",
-    DEVELOPER: "developer",
-    DEVELOPER: "developer",
+type Props = {
+  reviews: Review[]
+  createNewReview: (title: string, role: Role) => void,
+  selectReview: (review: Review) => void
 }
+export const Start = ({reviews, createNewReview, selectReview}: Props) => {
 
-export const Start = () => {
-  const reviews = [
-    {
-      title: "Side 1",
-      lastChanged: "2024-10-05T09:51:07.104Z",
-      numberOfTests: 100,
-      numberOfCompletedTests: 42,
-      role: 
-    },
-  ];
+
+  const [title, setTitle] = useState("");
+
+  const create = () => {
+    createNewReview(title, "DEVELOPER")
+  }
 
   return (
     <>
       <h2>Create new review</h2>
-      <button type="button">Start ny</button>
+      <label>
+        Title:
+        <input type="text" value={title} onInput={(e) => setTitle(e.target.value)} />
+      </label>
+      <button type="button" onClick={create}>Start ny</button>
       <h2>Continue existing review</h2>
-      {reviews.map(review => <button style={styles.continueButton} type="button">
-        <span>
-            {review.title}
-            </span>
-            <span>
-Last changed: 
-        {review.lastChanged}
-            </span>
-            <span>
-                Completion: {review.numberOfCompletedTests/review.numberOfTests}
-            </span>
-      </button>)}
+      {reviews.map((review: Review) => (
+        <button key={review.created} onClick={() => selectReview(review)} className={styles.continueButton} type="button">
+          <span>{review.title}</span>
+          <span>
+            Last changed:
+            {review.lastChanged}
+          </span>
+          <span>
+            Completion: {review.numberOfCompletedTests / review.numberOfTests}
+          </span>
+        </button>
+      ))}
     </>
   );
 };

@@ -1,0 +1,29 @@
+.tests {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.test {
+  padding: 1rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.testStatus {
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+
+  label {
+    border-right: 1px solid black;
+    padding: 0.5rem;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
