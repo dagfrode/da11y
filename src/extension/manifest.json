@@ -7,7 +7,7 @@
     "default_title": "Click to open panel"
   },
   "side_panel": {
-    "default_path": "main.html"
+    "default_path": "generated/index.html"
   },
   "permissions": ["sidePanel", "activeTab"],
   "commands": {

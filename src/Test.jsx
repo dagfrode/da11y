@@ -31,7 +31,3 @@ const TestCategory = () => {
     </div>
   );
 };
-
-const Test = () => {
-  return;
-};
